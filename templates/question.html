@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+    <link rel="stylesheet" type="text/css" href={{cssfile}}>
+
+</head>
+<body>
+<a href="/">На главную</a>
+    <div class="question">{{question.topic}}</div>
+    <form method="post" action="">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        {{form.message_text}}
+        {{form.submit}}
+    </form>
+    {%for elem in question.messages%}
+    <div class="message"><p class="text">{{elem.text}}</p>
+        <a class="username" href="/profile/{{elem.user.username}}">{{elem.user.username}}</a>
+        {{elem.created_date}}
+            </div>
+    {%endfor%}
+</body>
+</html>

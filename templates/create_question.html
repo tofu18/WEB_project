@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать тред</title>
+</head>
+<body>
+    <form action="" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+        <p>{{form.topic.label}}</p>
+        <p>{{form.topic}}</p>
+        <p>{{form.submit}}</p>
+    </form>
+</body>
+</html>

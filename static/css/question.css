@@ -1,0 +1,18 @@
+.message {
+	background-color: #42aaff;
+	height: 100px;
+	width: 500px;
+	word-break: break-all;
+	margin-bottom:50px;
+	
+}
+
+.username {
+	margin-top:200px;
+	
+}
+
+.text{
+	font-size: 30px;
+	
+}
