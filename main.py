@@ -6,8 +6,11 @@ from data.tables import User, Question, Message
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField, TextAreaField
 from wtforms.validators import DataRequired
 from flask_ngrok import run_with_ngrok
+import os
+import random
 
 app = Flask(__name__)
+run_with_ngrok(app)
 app.config['SECRET_KEY'] = 'super_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -18,7 +21,7 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     repeat_password = PasswordField('Повторите пароль', validators=[DataRequired()])
-    profile_image = FileField('Картинка профиля')
+    profile_image = FileField()
     submit = SubmitField('Зарегистрироваться')
 
 
@@ -60,6 +63,12 @@ def registration():
         else:
             new_user = User(username=form.username.data, email=form.email.data)
             new_user.set_password(form.password.data)
+            f = form.profile_image.data
+            print(f)
+            if f is not None:
+                image_name = f'static/img/{random.randrange(1, 2**20)}.jpg'
+                f.save(image_name)
+                new_user.profile_image = image_name
             session.add(new_user)
             session.commit()
     return render_template('register.html', form=form, error_message=error_message)
@@ -124,7 +133,6 @@ def question(question_id):
         message = Message(creator_id=current_user.id, response_to_question=question_id, text=form.message_text.data)
         session.add(message)
         session.commit()
-    print(url_for('static', filename='css/question.css'))
     return render_template('question.html', question=question, form=form, cssfile=url_for('static', filename='css/question.css'))
 
 

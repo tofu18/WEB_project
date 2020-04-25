@@ -7,19 +7,59 @@
 
 </head>
 <body>
+
 <a href="/">На главную</a>
-    <div class="question">{{question.topic}}</div>
-    <form method="post" action="">
-        {{ form.hidden_tag() }}
-        {{ form.csrf_token }}
-        {{form.message_text}}
-        {{form.submit}}
-    </form>
-    {%for elem in question.messages%}
-    <div class="message"><p class="text">{{elem.text}}</p>
-        <a class="username" href="/profile/{{elem.user.username}}">{{elem.user.username}}</a>
-        {{elem.created_date}}
-            </div>
-    {%endfor%}
+<div class="question" align="center">{{question.topic}}</div>
+<p class="author"> Автор вопроса <a href="/profile/{{question.user.id}}">{{question.user.username}}</a></p>
+<table>
+    <tr>
+        <td>
+
+<a href="#post">Написать сообщение</a>
+
+
+            {%for elem in question.messages%}
+            <table class="message" rules="cols">
+                <tr>
+                    <td class="info">
+                        {%if elem.user.profile_image == None%}
+                        <img src="/static/img/default.png" class="profile_image"><br>
+                        {%else%}
+                        <img src="/{{elem.user.profile_image}}" class="profile_image"><br>
+                        {%endif%}
+                        <a class="username" href="/profile/{{elem.user.username}}">{{elem.user.username}}</a>
+
+                    </td>
+                    <td class="text" valign="top">
+                        <p>{{elem.text}}</p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        {{elem.created_date}}
+                    </td>
+                    <td align="right">#{{elem.id}}</td>
+                </tr>
+
+
+            </table>
+            {%endfor%}
+        </td>
+                <td valign="top">
+    <div id="post">
+        <a href="#" id="close">X</a>
+        <form method="post" action="">
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+            {{form.message_text()}}<br>
+            {{form.submit}}
+        </form>
+    </div>
+        </td>
+    </tr>
+</table>
+
+
 </body>
 </html>

@@ -1,18 +1,78 @@
 .message {
 	background-color: #42aaff;
-	height: 100px;
-	width: 500px;
+	height: 200px;
+	width: 700px;
 	word-break: break-all;
 	margin-bottom:50px;
-	
+	border: 1px solid black;
 }
+
 
 .username {
 	margin-top:200px;
+	text-align:left;
 	
 }
 
 .text{
-	font-size: 30px;
+
+}
+
+.profile_image {
+	width:140px;
+	height: 140px;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+textarea {
+	width:500px;
+	height: 300px;
+	resize: none;
+	margin: auto;
+}
+
+.info {
+	width:150px;
+}
+
+th {
+	text-align:right;
+}
+
+.index {
+	width:100px;
 	
+}
+
+td {
+	padding-right: 10px;
+}
+
+.question {
+	background-color:#42aaff;
+	height: 150px;
+	font-size: 50px;
+	padding-top:10px;
+	
+	
+}
+
+.author {
+	background-color:#42aaff;
+	
+}
+
+#post {
+background-color:orange;
+display:none;
+width: 560px;
+height: 390px;
+text-align:center;
+}
+
+#post:target {display: block;}
+
+#close {
+	margin-left:540px;
 }
