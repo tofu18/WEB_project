@@ -2,21 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="static/css/index.css">
     <title>Questions</title>
 </head>
 <body>
 <nav>
-    <a href="/create_question">Задать вопрос</a>
-    <a href="/profile/{{user.id}}">Мой аккаунт</a>
+    <a href="/create_question" class="btn btn-primary">Задать вопрос</a>
+    <a href="/profile/{{user.id}}" class="btn btn-primary">Мой аккаунт</a>
 </nav>
 {%for elem in questions%}
-<div class="question">
-    <p class="topic">{{elem.topic}}</p>
-    <a class="username" href="/profile/{{elem.user.id}}">{{elem.user.username}}</a>
-    <div class="button"><a class="linkbutton" href="/question/{{elem.id}}">Войти</a></div>
-    {{elem.created_date}}
-</div>
-{%endfor%}
+    <div class="question">
+        <p class="text">{{elem.text}}</p>
+        <p><a class="username" href="/profile/{{elem.user.id}}">{{elem.user.username}}</a></p>
+
+
+        {%if elem.pinned_image != None%}
+        <img src="{{elem.pinned_image}}"><br>
+
+        {%endif%}
+        <a class='btn btn-secondary' href="/question/{{elem.id}}">Войти</a>
+        {%if current_user.admin == 1%}
+        <a href="delete_question/{{elem.id}}" class='btn btn-secondary'>Удалить вопрос</a>
+        {%endif%}
+        {{elem.created_date}}
+    </div>
+    {%endfor%}
 </body>
-</html>+
+</html>

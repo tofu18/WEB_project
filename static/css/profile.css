@@ -1,0 +1,20 @@
+.info {
+	background-color:#42aaff;
+	text-align:center;
+	width: 400px;
+	border-radius: 30px;
+	
+}
+
+img {
+	width:300px;
+	height:300px;
+	
+}
+
+textarea {
+	width:300px;
+	height:150px;
+	resize:none;
+	
+}

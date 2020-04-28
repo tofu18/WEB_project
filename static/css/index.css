@@ -1,26 +1,31 @@
 .question {
 	background-color: #42aaff;
-	height: 200px;
 	width: 1920px;
 	word-break: break-all;
 	text-align:center;
+	font-size:30px;
+	margin-bottom: 30px;
+	float:bottom;
 }
 
 .topic {
 	font-size:250%;
 }
 
-.button{
+.btn {
 	background-color:red;
-	width:100px;
-	height: 30px;
-	text-align:middle;
-	border-radius: 30px;
-	margin-left: 910px;
-	margin-bottom:50px;
 }
 
-.linkbutton {
-	color: white;
-	text-decoration: none;
+nav {
+	margin-bottom:10px;
+}
+img {
+    max-width: 20%;
+    max-height: 20%;
+}
+
+img:hover {
+	max-width: 70%;
+    max-height: 70%;
+	
 }

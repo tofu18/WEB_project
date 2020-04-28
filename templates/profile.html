@@ -2,11 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/profile.css">
     <title>{{user.username}}</title>
 </head>
 <body>
-<p>id: {{user.id}}</p>
-<p>username: {{user.username}}</p>
+<div class="info">
+    {%if user.profile_image == None%}
+    <img src="/static/img/default.png">
+    {%else%}
+    <img src=/{{user.profile_image}}>
+    {%endif%}
+    <p>id: {{user.id}}</p>
+    <p>username: {{user.username}}</p>
+    <p>{{user.about}}</p>
+    <p>{{user.location}}</p>
+    <img src="/{{user.location_image}}">
+</div>
+{%if user.id == current_user.id%}
+<a href="/edit_profile">Изменить профиль</a>
+<a href="/delete_user/{{user.id}}">Удалить профиль</a>
+{%elif current_user.admin == 1%}
+<a href="/delete_user/{{user.id}}">Удалить профиль</a>
+{%endif%}
+{%if current_user.id == 1 and user.admin != 1 %}
+<a href="/give_mod_rights/{{user.id}}">Дать права модератора</a>
+{%endif%}
+
 <a href="/">Вернуться на главную</a>
+
 </body>
 </html>

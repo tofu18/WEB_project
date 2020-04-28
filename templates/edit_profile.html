@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/profile.css">
+    <title>Edit profile</title>
+</head>
+<body>
+<a href="/profile/{{current_user.id}}">Назад</a>
+<form method="post" action="" enctype="multipart/form-data" class="info">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <p>
+        {{form.username.label}}
+        {{form.username(value=current_user.username)}}
+        </p>
+        <p>
+        {{form.about.label}}
+        {{form.about(value=current_user.about)}}
+        </p>
+        <p>
+        {{form.location.label}}
+        {{form.location(value=current_user.location)}}
+        </p>
+        <p>
+        {{form.image.label}}
+        {{form.image}}
+        </p>
+        {{form.submit}}
+</form>
+
+</body>
+</html>

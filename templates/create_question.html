@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="static/css/create_question.css">
     <title>Создать тред</title>
 </head>
 <body>
-    <form action="" method="post">
+<a href="/">На главную</a>
+    <form action="" method="post"  enctype=multipart/form-data>
     {{ form.hidden_tag() }}
     {{ form.csrf_token }}
-        <p>{{form.topic.label}}</p>
-        <p>{{form.topic}}</p>
+        <p>{{form.text.label}}</p>
+        <p>{{form.text}}</p>
+		<p>{{form.image}}</p>
         <p>{{form.submit}}</p>
     </form>
 </body>

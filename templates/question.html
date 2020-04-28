@@ -9,17 +9,24 @@
 <body>
 
 <a href="/">На главную</a>
-<div class="question" align="center">{{question.topic}}</div>
+{%if question.pinned_image != None%}
+<div class="question" align="center"><p>{{question.text}}</p>
+    <img src="/{{question.pinned_image}}" class="main_image">
+</div>
+{%else%}
+<div class="question" align="center">{{question.text}}
+</div>
+{%endif%}
 <p class="author"> Автор вопроса <a href="/profile/{{question.user.id}}">{{question.user.username}}</a></p>
 <table>
     <tr>
         <td>
 
-<a href="#post">Написать сообщение</a>
+            <a href="#post">Написать сообщение</a>
 
 
             {%for elem in question.messages%}
-            <table class="message" rules="cols">
+            <table class="message" rules="cols" id="{{elem.id}}">
                 <tr>
                     <td class="info">
                         {%if elem.user.profile_image == None%}
@@ -27,7 +34,7 @@
                         {%else%}
                         <img src="/{{elem.user.profile_image}}" class="profile_image"><br>
                         {%endif%}
-                        <a class="username" href="/profile/{{elem.user.username}}">{{elem.user.username}}</a>
+                        <a class="username" href="/profile/{{elem.user.id}}">{{elem.user.username}}</a>
 
                     </td>
                     <td class="text" valign="top">
@@ -39,23 +46,32 @@
                     <td>
                         {{elem.created_date}}
                     </td>
-                    <td align="right">#{{elem.id}}</td>
+                    <td align="right">#{{elem.id}}
+                        {%if elem.reply_to != ''%}
+                        <a href="/question/{{question.id}}#{{elem.reply_to}}">Ответ на {{elem.reply_to}}</a>
+                        {%endif%}
+                        {%if current_user.admin == 1%}
+                        <a href="/delete_message/{{elem.id}}">Удалить сообщение</a>
+                        {%endif%}
+                    </td>
                 </tr>
 
 
             </table>
             {%endfor%}
         </td>
-                <td valign="top">
-    <div id="post">
-        <a href="#" id="close">X</a>
-        <form method="post" action="">
-            {{ form.hidden_tag() }}
-            {{ form.csrf_token }}
-            {{form.message_text()}}<br>
-            {{form.submit}}
-        </form>
-    </div>
+        <td valign="top">
+            <div id="post">
+                <a href="#" id="close">X</a>
+                <form method="post" action="">
+                    {{ form.hidden_tag() }}
+                    {{ form.csrf_token }}
+                    {{form.message_text}}
+                    <p>В ответ на (Не обязательно)</p>
+                    {{form.reply_to}}
+                    {{form.submit}}
+                </form>
+            </div>
         </td>
     </tr>
 </table>
