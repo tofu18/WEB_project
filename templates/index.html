@@ -13,6 +13,7 @@
 <nav>
     <a href="/create_question" class="btn btn-primary">Задать вопрос</a>
     <a href="/profile/{{user.id}}" class="btn btn-primary">Мой аккаунт</a>
+    <a href="/logout" class="btn btn-primary">Выйти из аккаунта</a>
 </nav>
 {%for elem in questions%}
     <div class="question">
@@ -24,9 +25,9 @@
         <img src="{{elem.pinned_image}}"><br>
 
         {%endif%}
-        <a class='btn btn-secondary' href="/question/{{elem.id}}">Войти</a>
+        <a class='btn btn-primary' href="/question/{{elem.id}}">Войти</a>
         {%if current_user.admin == 1%}
-        <a href="delete_question/{{elem.id}}" class='btn btn-secondary'>Удалить вопрос</a>
+        <a href="delete_question/{{elem.id}}" class='btn btn-primary'>Удалить вопрос</a>
         {%endif%}
         {{elem.created_date}}
     </div>

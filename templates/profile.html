@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/static/css/profile.css">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
     <title>{{user.username}}</title>
 </head>
 <body>
+<a href="/" class="btn btn-primary">Вернуться на главную</a>
+
 <div class="info">
     {%if user.profile_image == None%}
     <img src="/static/img/default.png">
@@ -13,22 +19,27 @@
     <img src=/{{user.profile_image}}>
     {%endif%}
     <p>id: {{user.id}}</p>
-    <p>username: {{user.username}}</p>
-    <p>{{user.about}}</p>
-    <p>{{user.location}}</p>
+    <p>Никнейм: {{user.username}}</p>
+    <p>О себе: {{user.about}}</p>
+    <p>Геолокация: {{user.location}}</p>
+    {% if user.location_image != None%}
     <img src="/{{user.location_image}}">
+    {%endif%}
 </div>
 {%if user.id == current_user.id%}
-<a href="/edit_profile">Изменить профиль</a>
-<a href="/delete_user/{{user.id}}">Удалить профиль</a>
+<a href="/edit_profile" class="btn btn-primary">Изменить профиль</a>
+<a href="/delete_user/{{user.id}}" class="btn btn-primary">Удалить профиль</a>
 {%elif current_user.admin == 1%}
-<a href="/delete_user/{{user.id}}">Удалить профиль</a>
+<a href="/delete_user/{{user.id}}" class="btn btn-primary">Удалить профиль</a>
 {%endif%}
 {%if current_user.id == 1 and user.admin != 1 %}
-<a href="/give_mod_rights/{{user.id}}">Дать права модератора</a>
+<a href="/give_mod_rights/{{user.id}}" class="btn btn-primary">Дать права модератора</a>
 {%endif%}
 
-<a href="/">Вернуться на главную</a>
+{%if user.admin == 1 and current_user.id == 1%}
+<a href="/remove_mod_rights/{{user.id}}" class="btn btn-primary">Убрать права модератора</a>
+{%endif%}
+
 
 </body>
 </html>

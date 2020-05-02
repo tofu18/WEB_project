@@ -78,3 +78,7 @@ text-align:center;
 #close {
 	margin-left:540px;
 }
+
+.btn {
+	background-color:red;
+}

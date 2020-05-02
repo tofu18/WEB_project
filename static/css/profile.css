@@ -3,7 +3,9 @@
 	text-align:center;
 	width: 400px;
 	border-radius: 30px;
-	
+	padding:30px;
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 img {
@@ -17,4 +19,7 @@ textarea {
 	height:150px;
 	resize:none;
 	
+}
+.btn {
+	background-color:red;
 }
